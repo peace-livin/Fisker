@@ -1,14 +1,15 @@
 import Image from "next/image";
 import Zoom from "react-medium-image-zoom";
+import { imageMap, interiorMap } from "@/lib/imageMap";
 import "react-medium-image-zoom/dist/styles.css";
 
-function Preview({exteriorColor, interiorColor, wheelColor}) {
+function Preview({ exterior, wheel, interior }) {
   return (
     <>
       {/* Exterior Image */}
       <Zoom>
         <Image
-          src="/slipstream_black.webp"
+          src={imageMap[exterior].wheels[wheel]}
           alt=""
           width={0}
           height={0}
@@ -19,22 +20,24 @@ function Preview({exteriorColor, interiorColor, wheelColor}) {
 
       {/* Exterior Description */}
       <section className="my-4 pl-2">
-        <h3 className="text-2xl font-bold">Metallic Gloss</h3>
-        <p>A rich and luxurious interior with a modern and sleek design.</p>
+        <h3 className="text-2xl font-bold">
+          {exterior}: {imageMap[exterior].finish} w/ {wheel}
+        </h3>
+        <p>{imageMap[exterior].description}</p>
       </section>
       {/* Interior Image */}
       <Zoom>
         <Image
-          src="/slipstream_black.webp"
+          src={interiorMap[interior]}
           alt=""
           width={0}
           height={0}
           sizes="100%"
-          className="h-96 w-full rounded-lg object-cover sm:h-[500px]"
+          className="h-96 w-full rounded-lg object-cover sm:h-[500px]"  
         />
       </Zoom>
       <section className="mt-4 pl-2">
-        <h3 className="text-xl font-bold">Interior Color</h3>
+        <h3 className="text-xl font-bold">Interior {interior}</h3>
       </section>
     </>
   );
